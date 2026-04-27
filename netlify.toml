@@ -5,6 +5,25 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Keep client assets out of the SSR catch-all.
+[[redirects]]
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.js"
+  to = "/:splat.js"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/*.css"
+  to = "/:splat.css"
+  status = 200
+  force = true
+
 # Send all actual page routes to the SSR function
 [[redirects]]
   from = "/*"
