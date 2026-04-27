@@ -1,14 +1,11 @@
-import { serve } from "srvx";
-import { serveStatic } from "srvx/static";
-import handler from "./dist/server/server.js";
+import { createRequestHandler } from "@netlify/remix-adapter";
 
-const port = Number(process.env.PORT) || 5000;
+export default async (request) => {
+  const { default: handler } = await import("../../dist/server/server.js");
+  return handler.fetch(request);
+};
 
-serve({
-  port,
-  hostname: "0.0.0.0",
-  middleware: [
-    serveStatic({ dir: "./dist/client" }),
-  ],
-  fetch: (request) => handler.fetch(request),
-});
+export const config = {
+  path: "/*",
+  preferStatic: true,
+};
