@@ -5,22 +5,6 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Let static assets serve directly (CSS, JS, fonts, images)
-[[redirects]]
-  from = "/assets/*"
-  to = "/assets/:splat"
-  status = 200
-
-[[redirects]]
-  from = "/*.js"
-  to = "/:splat.js"
-  status = 200
-
-[[redirects]]
-  from = "/*.css"
-  to = "/:splat.css"
-  status = 200
-
 # Send all actual page routes to the SSR function
 [[redirects]]
   from = "/*"
